@@ -92,32 +92,68 @@ var
 		rez: double;
 	begin
 		rez :=0;
-		{
-		for i :=1 to n1+n2 do
-		begin
-			writeln(f, '[', arr[i,1]:0:10,', ',
-							arr[i,2]:0:10,', ',
-							arr[i,3]:0:10,'],');
-		end;
-		{}
 		for i :=0 to n1+n2 do
 			for j:=i+1 to n1+n2 do
 				rez := rez + Vr(i,j);
-		E :=rez;
+		E := rez;
 	end;
-	
+	procedure pereschet_R(k:word);
+	var
+		i:word;
+	begin
+		for i := 1 to k-1 do Rij(i,k);
+		for i := k+1 to n1+n2 do Rij(k,i);
+	end;
 	procedure relax;
 	var
-		d:double;
+		d, curr_E, prev_E :double;
+		napr, i, k :word;
+		f:text;
 	begin
+		assign(f, 'out.txt'); rewrite(f);
+		prev_E := E;
+		for i:=1 to 1000 do
+		begin
+			k := random(n1+n2) + 1;
+			napr := random(3) + 1;{выбираем случайное направление }
+			d := (random(10000) - 50000) / 1000000; {случайное смещение }
+			arr[k, napr] := arr[k, napr] + d;
+			pereschet_R(k);
+			curr_E :=E;
+			if((prev_E - curr_E)<0) then
+			begin
+				arr[k, napr] := arr[k, napr] - d;
+				pereschet_R(k);
+			end
+			else
+				prev_E := curr_E;
+			writeln(f,E:0:0);{}
+		end;
+		close(f);
 	end;
-
+	procedure maple_out;
+	var
+		i:word;
+		fm:text;
+	begin
+		assign(fm,'maple.mpl'); rewrite(fm);
+		writeln(fm, 'with(plots,Interactive,pointplot3d);'
+			,#13#10'pointplot3d({');
+		for i :=0 to n1+n2-1 do
+		begin
+			writeln(fm, '[', arr[i,1]:0:10,', ',
+				arr[i,2]:0:10,', ',
+				arr[i,3]:0:10,'],');
+		end;
+		writeln(fm,'[', arr[n1+n2,1]:0:10,', ',
+			arr[n1+n2,2]:0:10,', ',
+			arr[n1+n2,3]:0:10,']},axes=normal,symbol=circle,symbolsize=4);');
+		close(fm);
+	end;
 begin
-	assign(f, 'out.txt'); rewrite(f);
 	randomize;
 	random_array;
-	writeln(E:0:13);
-	Vr(1,4);
-	close(f);
+	relax;
+	maple_out;
 	readln;
 end.
