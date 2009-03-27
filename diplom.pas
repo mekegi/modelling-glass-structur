@@ -2,14 +2,17 @@
 {$M 16384,0,655360}
 uses crt;
 const
-	n0 = 1; r0 = 0; q0 = +2;
-	n1 = 8; r1 = 3; q1 = -4;
-	n2 = 1; r2 = 5; q2 = +3;
+	n0 = 1; r0 = 0; q0 = +4;
+	n1 = 1; r1 = 3; q1 = -2;
+	n2 = 1; r2 = 4.5; q2 = +2;
 	pi = 3.1459;
 	pi_2 = pi/2;
 	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
 	rh = 0.529; {радиус первой орбиты атома водорода}
-	B=43;
+	B=143;
+	aa=2;
+	bb=4;
+	A=100;
 type
 	TArr = array[0..n1+n2,1..4] of double; {массив из частиц}
 	TRij = array[0..n1+n2,0..n1+n2] of double; {массив хранящий расстояния
@@ -80,7 +83,13 @@ var
 	function Vr(i1,i2: word) : double;
 	begin
 		if (i1 < i2) then
-			Vr := arr[i1,4]*arr[i2,4]/R[i1,i2]+B*power(R[i1,i2],7)
+		begin
+			if ((arr[i1,4]>0)and(arr[i2,4]>0))or((arr[i1,4]<0)and(arr[i2,4]<0)) then 
+				Vr := B*power(bb/R[i1,i2], 12) {arr[i1,4]*arr[i2,4]/R[i1,i2]{}
+			else
+				Vr := A*(power(aa/R[i1,i2], 12) - power(aa/R[i1,i2], 6))
+				{arr[i1,4]*arr[i2,4]/R[i1,i2] + B/power(R[i1,i2],9){}
+		end
 		else
 			Vr :=0;
 	end;
@@ -101,26 +110,28 @@ var
 	var
 		i:word;
 	begin
-		for i := 1 to k-1 do Rij(i,k);
+		for i := 0 to k-1 do Rij(i,k);
 		for i := k+1 to n1+n2 do Rij(k,i);
 	end;
 	procedure relax;
 	var
 		d, curr_E, prev_E :double;
-		napr, i, k :word;
+		napr, k :word;
+		i:longint;
 		f:text;
 	begin
 		assign(f, 'out.txt'); rewrite(f);
 		prev_E := E;
-		for i:=1 to 1000 do
+		for i:=1 to 100000 do
 		begin
 			k := random(n1+n2) + 1;
 			napr := random(3) + 1;{выбираем случайное направление }
-			d := (random(10000) - 50000) / 1000000; {случайное смещение }
+			d := (random(10000) - 50000) / 4000000; {случайное смещение }
 			arr[k, napr] := arr[k, napr] + d;
 			pereschet_R(k);
 			curr_E :=E;
-			if((prev_E - curr_E)<0) then
+			if(((curr_E<0)and(prev_E>0))or((curr_E>0)and(prev_E<0))) then break;
+			if((((prev_E - curr_E)<0) and(prev_E>0))or(((prev_E - curr_E)>0) and(prev_E<0))) then
 			begin
 				arr[k, napr] := arr[k, napr] - d;
 				pereschet_R(k);
@@ -143,11 +154,11 @@ var
 		begin
 			writeln(fm, '[', arr[i,1]:0:10,', ',
 				arr[i,2]:0:10,', ',
-				arr[i,3]:0:10,'],');
+				arr[i,3]:0:10,'], #',R[0,i]:0:4);
 		end;
 		writeln(fm,'[', arr[n1+n2,1]:0:10,', ',
 			arr[n1+n2,2]:0:10,', ',
-			arr[n1+n2,3]:0:10,']},axes=normal,symbol=circle,symbolsize=4);');
+			arr[n1+n2,3]:0:10,']},axes=normal,symbol=circle,symbolsize=4); #',R[0,n1+n2]:0:4);
 		close(fm);
 	end;
 begin
@@ -155,5 +166,5 @@ begin
 	random_array;
 	relax;
 	maple_out;
-	readln;
+	{readln;{}
 end.
