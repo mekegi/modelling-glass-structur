@@ -1,4 +1,4 @@
-#labels Phase-Design
+#labels Phase-Design,Featured
 = Синтаксис Maple-овского файла =
 
 На выходе программа генерирует два файла. OUT.TXT и MAPLE.MPL.
