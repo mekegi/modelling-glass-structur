@@ -3,37 +3,42 @@
 uses crt;
 const
 	n0 = 1; r0 = 0; q0 = 2;
-	n1 = 8; r1 = 3; q1 = -2;
+	n1 = 4; r1 = 3; q1 = -2;
 	n2 = 0; r2 = 4.5; q2 = +2;
 	pi = 3.1459;
 	pi_2 = pi/2;
-	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
-	rh = 0.529; {радиус первой орбиты атома водорода}
-	B=42;
-	aa=2;
-	bb=4;
-	A=100;
+	pi10000 = 31459; {С‡С‚РѕР±С‹ РІ С†РёРєР»Рµ РЅРµ РІС‹С‡РёСЃР»СЏС‚СЊ РІС‹СЂР°Р¶РµРЅРёРµ 10000*РїРё}
+	rh = 0.529; {СЂР°РґРёСѓСЃ РїРµСЂРІРѕР№ РѕСЂР±РёС‚С‹ Р°С‚РѕРјР° РІРѕРґРѕСЂРѕРґР°}
+	B=1;
+	aa=1;
+	bb=1;
+	A=1;
 type
-	TArr = array[0..n1+n2,1..4] of double; {массив из частиц}
-	TRij = array[0..n1+n2,0..n1+n2] of double; {массив хранящий расстояния
-		между частицами. например R[2,8] - будет равно расстоянию между 
-		2 и 8 частицами}
+	TArr = array[0..n1+n2,1..4] of double; {РјР°СЃСЃРёРІ РёР· С‡Р°СЃС‚РёС†}
+	TRij = array[0..n1+n2,0..n1+n2] of double; {РјР°СЃСЃРёРІ С…СЂР°РЅСЏС‰РёР№ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ
+		РјРµР¶РґСѓ С‡Р°СЃС‚РёС†Р°РјРё. РЅР°РїСЂРёРјРµСЂ R[2,8] - Р±СѓРґРµС‚ СЂР°РІРЅРѕ СЂР°СЃСЃС‚РѕСЏРЅРёСЋ РјРµР¶РґСѓ 
+		2 Рё 8 С‡Р°СЃС‚РёС†Р°РјРё}
 var
 	f  : text;
 	arr: TArr;
 	R  : TRij;
-	{возведение числа х в степень n}
-	function power(x: double; n:word) : double;
+	{РІРѕР·РІРµРґРµРЅРёРµ С‡РёСЃР»Р° С… РІ СЃС‚РµРїРµРЅСЊ n}
+	function power(x: double; n:integer) : double;
 	var 
-		i:word;
+		i,m:integer;
 		rez:double;
 	begin
-		rez:=1;
-		for i:=1 to n do rez := rez * x;
-		power:=rez;
+		if n=0 then power:=1
+		else begin
+			m := abs(n);
+			rez:=1;
+			for i:=1 to m do rez := rez * x;
+			if n>0 then power := rez
+			else        power := 1/rez;
+		end;
 	end;
 	
-	{расстояние между частицами}
+	{СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‡Р°СЃС‚РёС†Р°РјРё}
 	function ArcSin( x:double):double;
 	begin
 		ArcSin:=Arctan(x/Sqrt(1-x*x));
@@ -48,7 +53,7 @@ var
 		R[i1,i2] := sqrt(dx*dx+dy*dy+dz*dz); {}
 		Rij := R[i1,i2];
 	end;
-	{первоначальный разброс частиц}
+	{РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹Р№ СЂР°Р·Р±СЂРѕСЃ С‡Р°СЃС‚РёС†}
 	procedure random_array;
 	var 
 		i, j : word;
@@ -79,23 +84,24 @@ var
 				Rij(i,j);
 	end;
 	
-	{сила с которой i1-я частица действует на i2-ю}
+	{СЃРёР»Р° СЃ РєРѕС‚РѕСЂРѕР№ i1-СЏ С‡Р°СЃС‚РёС†Р° РґРµР№СЃС‚РІСѓРµС‚ РЅР° i2-СЋ}
 	function Vr(i1,i2: word) : double;
 	begin
 		if (i1 < i2) then
 		begin
-			if ((arr[i1,4]>0)and(arr[i2,4]>0))or((arr[i1,4]<0)and(arr[i2,4]<0)) then 
-				{Vr := B*power(bb/R[i1,i2], 12) {}
-				Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2]{}
-			else
-				{Vr := A*(power(aa/R[i1,i2], 12) - power(aa/R[i1,i2], 6)){}
-				Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2] + B/power(R[i1,i2],9){}
+			{if ((arr[i1,4]>0)and(arr[i2,4]>0))or((arr[i1,4]<0)and(arr[i2,4]<0)) then 
+				Vr := B*power(bb/R[i1,i2], 12) {}
+				{Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2]{}
+			{else
+				Vr := A*power(aa/R[i1,i2], 12) + arr[i1,4]*arr[i2,4]/R[i1,i2]{}
+				{Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2] + B/power(R[i1,i2],9){}
+			Vr := arr[i1,4]*arr[i2,4]/R[i1,i2] + B*power(R[i1,i2],-12);
 		end
 		else
 			Vr :=0;
 	end;
 	
-	{энергия системы}
+	{СЌРЅРµСЂРіРёСЏ СЃРёСЃС‚РµРјС‹}
 	function E : double;
 	var
 		i,j:word;
@@ -126,8 +132,8 @@ var
 		for i:=1 to 100000 do
 		begin
 			k := random(n1+n2) + 1;
-			napr := random(3) + 1;{выбираем случайное направление }
-			dx := (random(10000) - 50000) / 4000000; {случайное смещение }
+			napr := random(3) + 1;{РІС‹Р±РёСЂР°РµРј СЃР»СѓС‡Р°Р№РЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ }
+			dx := (random(10000) - 50000) / 4000000; {СЃР»СѓС‡Р°Р№РЅРѕРµ СЃРјРµС‰РµРЅРёРµ }
 			dy := (random(10000) - 50000) / 4000000; 
 			dz := (random(10000) - 50000) / 4000000; 
 			{arr[k, napr] := arr[k, napr] + dx; {}
