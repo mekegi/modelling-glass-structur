@@ -2,35 +2,52 @@
 {$M 16384,0,655360}
 uses crt;
 const
-	n0 = 1; r0 = 0; q0 = 2;
-	n1 = 4; r1 = 3; q1 = -2;
-	n2 = 0; r2 = 4.5; q2 = +2;
 	pi = 3.1459;
 	pi_2 = pi/2;
 	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
 	rh = 0.529; {радиус первой орбиты атома водорода}
-	B=10;
-	aa=1;
-	bb=1;
-	A=1;
+	max_iter = 100000; {максимальное число итерций}
+	n = 50; {максимальное количество частиц}
 type
-	TArr = array[0..n1+n2,1..4] of double; {массив из частиц}
-	TRij = array[0..n1+n2,0..n1+n2] of double; {массив хранящий расстояния
+	TArr = array[0..n,1..4] of double; {массив из частиц
+		первый индекс это номер частицы. второй индекс это координата
+		частицы}
+	
+	TRij = array[0..n,0..n] of double; {массив хранящий расстояния
 		между частицами. например R[2,8] - будет равно расстоянию между 
 		2 и 8 частицами}
 var
-	f  : text;
+	{n0 = 1; r0 = 0; q0 = 2;
+	n1 = 4; r1 = 3; q1 = -2;
+	n2 = 1; r2 = 4.5; q2 = +2;
+	B=10; aa=1; bb=1; A=1; {}
+	
+	q0, n1, q1, n2, q2: integer;
+	r1, r2, B, aa, bb, A:double;
+
 	arr: TArr;
 	R  : TRij;
+	{процедура считывает из файла константы}
+	procedure read_constant(s:string);
+	var
+		f:text;
+	begin
+		assign(f,s); reset(f);
+		readln(f,q0);
+		readln(f,n1,r1,q1);
+		readln(f,n2,r2,q2);
+		readln(f,A,B,aa,bb);
+		close(f);
+	end;
 	{возведение числа х в степень n}
 	function power(x: double; n:integer) : double;
 	var 
 		i,m:integer;
 		rez:double;
 	begin
-		if n=0 then power:=1
+		if n=0 then power:=1 {нулевая степень числа всегда равна 1}
 		else begin
-			m := abs(n);
+			m := abs(n); 
 			rez:=1;
 			for i:=1 to m do rez := rez * x;
 			if n>0 then power := rez
@@ -38,11 +55,12 @@ var
 		end;
 	end;
 	
-	{расстояние между частицами}
-	function ArcSin( x:double):double;
+	function ArcSin(x:double):double;
 	begin
 		ArcSin:=Arctan(x/Sqrt(1-x*x));
 	end;
+
+	{функция вычисляет расстояние между частицами}
 	function Rij(i1,i2:word) : double;
 	var 
 		dx,dy,dz:double;
@@ -53,6 +71,7 @@ var
 		R[i1,i2] := sqrt(dx*dx+dy*dy+dz*dz); {}
 		Rij := R[i1,i2];
 	end;
+	
 	{первоначальный разброс частиц}
 	procedure random_array;
 	var 
@@ -109,10 +128,13 @@ var
 	begin
 		rez :=0;
 		for i :=0 to n1+n2 do
+		{обратите внимание на пределы цикла по j}
 			for j:=i+1 to n1+n2 do
 				rez := rez + Vr(i,j);
 		E := rez;
 	end;
+	
+	{функция обновляет расстояния для к-ой частицы}
 	procedure pereschet_R(k:word);
 	var
 		i:word;
@@ -120,33 +142,45 @@ var
 		for i := 0 to k-1 do Rij(i,k);
 		for i := k+1 to n1+n2 do Rij(k,i);
 	end;
+	{процедура релаксации}
 	procedure relax;
 	var
 		dx,dy,dz, curr_E, prev_E :double;
-		napr, k :word;
+		k :word;
 		i:longint;
 		f:text;
 	begin
 		assign(f, 'out.txt'); rewrite(f);
-		prev_E := E;
-		for i:=1 to 100000 do
+		prev_E := E; {предыдущее значении энергии. Обратите внимание E - 
+		это не переменная, это процедура}
+		for i:=1 to max_iter do
 		begin
 			k := random(n1+n2) + 1;
-			napr := random(3) + 1;{выбираем случайное направление }
-			dx := (random(10000) - 50000) / 4000000; {случайное смещение }
-			dy := (random(10000) - 50000) / 4000000; 
-			dz := (random(10000) - 50000) / 4000000; 
-			{arr[k, napr] := arr[k, napr] + dx; {}
+			
+			{Выражение (random(10000) - 50000) / 5000000 будет возвращать
+			случайные значения в интервале (0.01)}
+			dx := (random(10000) - 50000) / 5000000; {случайное смещение }
+			dy := (random(10000) - 50000) / 5000000; 
+			dz := (random(10000) - 50000) / 5000000; 
 			arr[k, 1] := arr[k, 1] + dx;
 			arr[k, 2] := arr[k, 2] + dy;
 			arr[k, 3] := arr[k, 3] + dz;
-			{}
+			
+			{так как мы сдвинули к-ую частицу то необходимо обновить
+			таблицу расстояний }
 			pereschet_R(k);
-			curr_E :=E;
-			if(((curr_E<0)and(prev_E>0))or((curr_E>0)and(prev_E<0))) then break;
-			if((((prev_E - curr_E)<0) and(prev_E>0))or(((prev_E - curr_E)>0) and(prev_E<0))) then
+			curr_E := E; 
+			
+			{если новая энергия поменяла знак относительно старой то
+			прекращаем итерации}
+			if(((curr_E<0)and(prev_E>0))or((curr_E>0)and(prev_E<0))) then
+				break;
+			
+			{если абсолютное значение энергии увеличилось, то такое
+			смещение частицы отвергается (частица возвращается в 
+			исходное состояние)}
+			if(abs(prev_E)<abs(curr_E)) then
 			begin
-				{arr[k, napr] := arr[k, napr] - d;{}
 				arr[k, 1] := arr[k, 1] - dx;
 				arr[k, 2] := arr[k, 2] - dy;
 				arr[k, 3] := arr[k, 3] - dz;{}
@@ -154,17 +188,18 @@ var
 			end
 			else
 				prev_E := curr_E;
-			writeln(f,E:0:10);{}
+			writeln(f,E:0:10);{отладочная печать значений энергии в файл}
 		end;
 		close(f);
 	end;
+	{процедура печати координат частиц в специальном формате Maple}
 	procedure maple_out;
 	var
 		i:word;
 		fm:text;
 	begin
-		assign(fm,'maple.mpl'); rewrite(fm);
-		writeln(fm, 'with(plots,Interactive,pointplot3d);'
+		assign(fm,'maple.txt'); rewrite(fm);
+		writeln(fm, 'restart: with(plots,Interactive,pointplot3d):'
 			,#13#10'pointplot3d({');
 		for i :=0 to n1+n2-1 do
 		begin
@@ -174,13 +209,22 @@ var
 		end;
 		writeln(fm,'[', arr[n1+n2,1]:0:10,', ',
 			arr[n1+n2,2]:0:10,', ',
-			arr[n1+n2,3]:0:10,']},axes=normal,symbol=circle,symbolsize=14); #',R[0,n1+n2]:0:4);
+			arr[n1+n2,3]:0:10,']},axes=normal,symbol=circle,symbolsize=14'
+			,'); #',R[0,n1+n2]:0:4);
 		close(fm);
 	end;
 begin
 	randomize;
+	
+	{= Считываем исходные данные из файла =}
+	read_constant('input.txt');
+	
+	{= Случайный Разброс частиц =}
 	random_array;
+	
+	{= Релаксация системы =}
 	relax;
+	
+	{= Вывод координат частиц =}
 	maple_out;
-	{readln;{}
 end.
