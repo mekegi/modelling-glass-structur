@@ -1,4 +1,4 @@
-= Ссылки =
+Ссылки
   * [Algorithm Алгоритм]
   * [MapleSintaxis Синтаксис Maple-овского файла]
   * [Program Программа]
