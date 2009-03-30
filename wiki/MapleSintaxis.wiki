@@ -1,3 +1,4 @@
+#sidebar Sidebar
 #labels Phase-Design,Featured
 = Синтаксис Maple-овского файла =
 
