@@ -1,0 +1,5 @@
+= Ссылки =
+  * [Algorithm Алгоритм]
+  * [MapleSintaxis Синтаксис Maple-овского файла]
+  * [Program Программа]
+  * [InputFormat Формат файла input.txt]
