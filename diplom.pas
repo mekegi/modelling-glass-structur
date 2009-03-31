@@ -6,8 +6,12 @@ const
 	pi_2 = pi/2;
 	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
 	rh = 0.529; {радиус первой орбиты атома водорода}
-	max_iter = 100000; {максимальное число итерций}
 	n = 50; {максимальное количество частиц}
+	h = 0.4;
+	{Vr0 = 8;
+	Vl0 = 1;
+	Ror = 1;
+	Rol = Ror;{}
 type
 	TArr = array[0..n,1..4] of double; {массив из частиц
 		первый индекс это номер частицы. второй индекс это координата
@@ -23,7 +27,9 @@ var
 	B=10; aa=1; bb=1; A=1; {}
 	
 	q0, n1, q1, n2, q2: integer;
-	r1, r2, B, aa, bb, A:double;
+	max_iter : longint;
+	debug, r1, r2, B, aa, bb, A, 
+	Vr0, Vl0, Ror, Rol:double;
 
 	arr: TArr;
 	R  : TRij;
@@ -33,10 +39,12 @@ var
 		f:text;
 	begin
 		assign(f,s); reset(f);
+		readln(f,max_iter, debug);
 		readln(f,q0);
 		readln(f,n1,r1,q1);
 		readln(f,n2,r2,q2);
-		readln(f,A,B,aa,bb);
+		{readln(f,A,B,aa,bb);{}
+		readln(f,Vr0,Vl0,Ror,Rol);
 		close(f);
 	end;
 	{возведение числа х в степень n}
@@ -65,11 +73,14 @@ var
 	var 
 		dx,dy,dz:double;
 	begin
-		dx := arr[i1,1]-arr[i2,1];
-		dy := arr[i1,2]-arr[i2,2];
-		dz := arr[i1,3]-arr[i2,3];
-		R[i1,i2] := sqrt(dx*dx+dy*dy+dz*dz); {}
-		Rij := R[i1,i2];
+		if(i1>i2) then Rij := 0
+		else begin
+			dx := arr[i1,1]-arr[i2,1];
+			dy := arr[i1,2]-arr[i2,2];
+			dz := arr[i1,3]-arr[i2,3];
+			R[i1,i2] := sqrt(dx*dx+dy*dy+dz*dz); {}
+			Rij := R[i1,i2];
+		end;
 	end;
 	
 	{первоначальный разброс частиц}
@@ -108,13 +119,14 @@ var
 	begin
 		if (i1 < i2) then
 		begin
-			{if ((arr[i1,4]>0)and(arr[i2,4]>0))or((arr[i1,4]<0)and(arr[i2,4]<0)) then 
-				Vr := B*power(bb/R[i1,i2], 12) {}
+			
+			if (arr[i1,4]=arr[i2,4]) then 
+				Vr := Vl0*power(R[i1,i2]/Rol, -12) {}
 				{Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2]{}
-			{else
-				Vr := A*power(aa/R[i1,i2], 12) + arr[i1,4]*arr[i2,4]/R[i1,i2]{}
+			else
+				Vr := Vr0*(power(R[i1,i2]/Ror, -12) - power(R[i1,i2]/Ror, -6)){}
 				{Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2] + B/power(R[i1,i2],9){}
-			Vr := arr[i1,4]*arr[i2,4]/R[i1,i2] + B*power(R[i1,i2],-12);
+			{Vr := arr[i1,4]*arr[i2,4]/R[i1,i2] + B*power(R[i1,i2],-12);{}
 		end
 		else
 			Vr :=0;
@@ -145,12 +157,17 @@ var
 	{процедура релаксации}
 	procedure relax;
 	var
-		dx,dy,dz, curr_E, prev_E :double;
+		dx,dy,dz, curr_E, prev_E,cR :double;
 		k :word;
-		i:longint;
+		i, j, check:longint;
 		f:text;
 	begin
-		assign(f, 'out.txt'); rewrite(f);
+		check := 0;
+		if (debug=1) then 
+		begin 
+			assign(f, 'out.txt'); rewrite(f); 
+		end;
+		
 		prev_E := E; {предыдущее значении энергии. Обратите внимание E - 
 		это не переменная, это процедура}
 		for i:=1 to max_iter do
@@ -159,43 +176,70 @@ var
 			
 			{Выражение (random(10000) - 50000) / 5000000 будет возвращать
 			случайные значения в интервале (0.01)}
-			dx := (random(10000) - 50000) / 5000000; {случайное смещение }
-			dy := (random(10000) - 50000) / 5000000; 
-			dz := (random(10000) - 50000) / 5000000; 
+			dx := (random - 0.5) * h; {случайное смещение }
+			dy := (random - 0.5) * h; 
+			dz := (random - 0.5) * h; 
 			arr[k, 1] := arr[k, 1] + dx;
 			arr[k, 2] := arr[k, 2] + dy;
 			arr[k, 3] := arr[k, 3] + dz;
-			
-			{так как мы сдвинули к-ую частицу то необходимо обновить
-			таблицу расстояний }
 			pereschet_R(k);
 			curr_E := E; 
+			j:=-1;
+
+(*			j:=0;
+			cR :=R[0, k];
+			repeat
+				dx := (random(10000) - 50000) / 5000000; {случайное смещение }
+				dy := (random(10000) - 50000) / 5000000; 
+				dz := (random(10000) - 50000) / 5000000; 
+				arr[k, 1] := arr[k, 1] + dx;
+				arr[k, 2] := arr[k, 2] + dy;
+				arr[k, 3] := arr[k, 3] + dz;
+				if((cR-Rij(0,k))<0.001) then 
+				begin
+					pereschet_R(k);
+					curr_E := E; 
+					j:=-1;
+					break;
+				end
+				else begin
+					arr[k, 1] := arr[k, 1] - dx;
+					arr[k, 2] := arr[k, 2] - dy;
+					arr[k, 3] := arr[k, 3] - dz;{}
+				end;
+				inc(j);
+			until j>1000;
+*)
+			{так как мы сдвинули к-ую частицу то необходимо обновить
+			таблицу расстояний }
 			
-			{если новая энергия поменяла знак относительно старой то
-			прекращаем итерации}
-			if(((curr_E<0)and(prev_E>0))or((curr_E>0)and(prev_E<0))) then
-				break;
-			
-			{если абсолютное значение энергии увеличилось, то такое
+			{если значение энергии увеличилось, то такое
 			смещение частицы отвергается (частица возвращается в 
 			исходное состояние)}
-			if(abs(prev_E)<abs(curr_E)) then
+			if((j<>-1)or(curr_E>prev_E)) then
 			begin
 				arr[k, 1] := arr[k, 1] - dx;
 				arr[k, 2] := arr[k, 2] - dy;
 				arr[k, 3] := arr[k, 3] - dz;{}
 				pereschet_R(k);
 			end
-			else
+			else begin
 				prev_E := curr_E;
-			writeln(f,E:0:10);{отладочная печать значений энергии в файл}
+				writeln(f,curr_E:0:10);
+				inc(check);
+			end;
 		end;
-		close(f);
+		
+		if (debug=1) then
+		begin
+			writeln(f,max_iter,' ',check, ' ',(check/max_iter*100):0:8,'%');
+			close(f);
+		end;
 	end;
 	{процедура печати координат частиц в специальном формате Maple}
 	procedure maple_out;
 	var
-		i:word;
+		i, j:word;
 		fm:text;
 	begin
 		assign(fm,'maple.txt'); rewrite(fm);
@@ -205,12 +249,22 @@ var
 		begin
 			writeln(fm, '[', arr[i,1]:0:10,', ',
 				arr[i,2]:0:10,', ',
-				arr[i,3]:0:10,'], #',R[0,i]:0:4);
+				arr[i,3]:0:10,'], #',R[0,i]:6:2,arr[i,4]:4:0);
 		end;
 		writeln(fm,'[', arr[n1+n2,1]:0:10,', ',
 			arr[n1+n2,2]:0:10,', ',
-			arr[n1+n2,3]:0:10,']},axes=normal,symbol=circle,symbolsize=14'
-			,'); #',R[0,n1+n2]:0:4);
+			arr[n1+n2,3]:0:10,']  #',R[0,n1+n2]:6:2,arr[i,4]:4:0,
+			#13#10'},axes=normal,symbol=circle,symbolsize=14);');
+
+		for i :=0 to n1+n2-1 do 
+		begin
+			write(fm, '#');
+			for j:=0 to n1+n2 do
+				write(fm, R[i,j]:8:5,' |');
+			writeln(fm);
+		end;
+		writeln(fm,'#',Vr0:0:3,' ',Vl0:0:3,' ',Ror:0:3,' ',Rol:0:3);
+		
 		close(fm);
 	end;
 begin
@@ -223,8 +277,9 @@ begin
 	random_array;
 	
 	{= Релаксация системы =}
-	relax;
+	relax;{}
 	
 	{= Вывод координат частиц =}
 	maple_out;
+	
 end.
