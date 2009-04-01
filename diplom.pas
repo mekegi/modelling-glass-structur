@@ -7,7 +7,6 @@ const
 	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
 	rh = 0.529; {радиус первой орбиты атома водорода}
 	n = 50; {максимальное количество частиц}
-	h = 0.4;
 	{Vr0 = 8;
 	Vl0 = 1;
 	Ror = 1;
@@ -28,7 +27,7 @@ var
 	
 	q0, n1, q1, n2, q2: integer;
 	max_iter : longint;
-	debug, r1, r2, B, aa, bb, A, 
+	h, debug, r1, r2, B, aa, bb, A, 
 	Vr0, Vl0, Ror, Rol:double;
 
 	arr: TArr;
@@ -162,6 +161,7 @@ var
 		i, j, check:longint;
 		f:text;
 	begin
+		h:=0.4;
 		check := 0;
 		if (debug=1) then 
 		begin 
@@ -173,7 +173,6 @@ var
 		for i:=1 to max_iter do
 		begin
 			k := random(n1+n2) + 1;
-			
 			{Выражение (random(10000) - 50000) / 5000000 будет возвращать
 			случайные значения в интервале (0.01)}
 			dx := (random - 0.5) * h; {случайное смещение }
@@ -186,30 +185,6 @@ var
 			curr_E := E; 
 			j:=-1;
 
-(*			j:=0;
-			cR :=R[0, k];
-			repeat
-				dx := (random(10000) - 50000) / 5000000; {случайное смещение }
-				dy := (random(10000) - 50000) / 5000000; 
-				dz := (random(10000) - 50000) / 5000000; 
-				arr[k, 1] := arr[k, 1] + dx;
-				arr[k, 2] := arr[k, 2] + dy;
-				arr[k, 3] := arr[k, 3] + dz;
-				if((cR-Rij(0,k))<0.001) then 
-				begin
-					pereschet_R(k);
-					curr_E := E; 
-					j:=-1;
-					break;
-				end
-				else begin
-					arr[k, 1] := arr[k, 1] - dx;
-					arr[k, 2] := arr[k, 2] - dy;
-					arr[k, 3] := arr[k, 3] - dz;{}
-				end;
-				inc(j);
-			until j>1000;
-*)
 			{так как мы сдвинули к-ую частицу то необходимо обновить
 			таблицу расстояний }
 			
@@ -227,6 +202,8 @@ var
 				prev_E := curr_E;
 				writeln(f,curr_E:0:10);
 				inc(check);
+				if(check=9)or(check=90)or(check=200)or(check=500)or(check=1000)
+					then h:=h/2;
 			end;
 		end;
 		
