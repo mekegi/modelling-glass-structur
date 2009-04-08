@@ -28,7 +28,9 @@ var
 	q0, n1, q1, n2, q2: integer;
 	max_iter : longint;
 	h, debug, r1, r2, B, aa, bb, A, 
-	Vr0, Vl0, Ror, Rol:double;
+	Vr0, Vl0, Ror, Rol,
+	Vr1, Vl1, Ror1, Rol1,
+	Vr2, Vl2, Ror2, Rol2:double;
 
 	arr: TArr;
 	R  : TRij;
@@ -44,6 +46,8 @@ var
 		readln(f,n2,r2,q2);
 		{readln(f,A,B,aa,bb);{}
 		readln(f,Vr0,Vl0,Ror,Rol);
+		readln(f,Vr1,Vl1,Ror1,Rol1);
+		readln(f,Vr2,Vl2,Ror2,Rol2);
 		close(f);
 	end;
 	{возведение числа х в степень n}
@@ -118,12 +122,23 @@ var
 	begin
 		if (i1 < i2) then
 		begin
-			
-			if (arr[i1,4]=arr[i2,4]) then 
-				Vr := Vl0*power(R[i1,i2]/Rol, -12) {}
+			if(i1=0) then
+			begin
+				if(arr[i2,4]=q1)then
+					Vr := Vr0*(power(R[i1,i2]/Ror, -12) - power(R[i1,i2]/Ror, -6)){}
+				else
+					Vr := Vl2*power(R[i1,i2]/Rol1, -12) {}
+			end
+			else if (arr[i1,4]=arr[i2,4]) then 
+			begin
+				if(arr[i2,4]=q1)then
+					Vr := Vl0*power(R[i1,i2]/Rol, -12) {}
+				else
+					Vr := Vl1*power(R[i1,i2]/Rol1, -12) {}
 				{Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2]{}
-			else
-				Vr := Vr0*(power(R[i1,i2]/Ror, -12) - power(R[i1,i2]/Ror, -6)){}
+			end
+			else 
+				Vr := Vr2*(power(R[i1,i2]/Ror2, -12) - power(R[i1,i2]/Ror2, -6)){}
 				{Vr :=arr[i1,4]*arr[i2,4]/R[i1,i2] + B/power(R[i1,i2],9){}
 			{Vr := arr[i1,4]*arr[i2,4]/R[i1,i2] + B*power(R[i1,i2],-12);{}
 		end
@@ -200,7 +215,7 @@ var
 			end
 			else begin
 				prev_E := curr_E;
-				writeln(f,curr_E:0:10);
+				if (debug=1) then writeln(f,curr_E:0:10);
 				inc(check);
 				if(check=9)or(check=90)or(check=200)or(check=500)or(check=1000)
 					then h:=h/2;
@@ -230,7 +245,7 @@ var
 		end;
 		writeln(fm,'[', arr[n1+n2,1]:0:10,', ',
 			arr[n1+n2,2]:0:10,', ',
-			arr[n1+n2,3]:0:10,']  #',R[0,n1+n2]:6:2,arr[i,4]:4:0,
+			arr[n1+n2,3]:0:10,']  #',R[0,n1+n2]:6:2,arr[n1+n2,4]:4:0,
 			#13#10'},axes=normal,symbol=circle,symbolsize=14);');
 
 		for i :=0 to n1+n2-1 do 
