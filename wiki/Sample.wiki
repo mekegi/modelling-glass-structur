@@ -1,8 +1,8 @@
 #labels Featured
 #sidebar Sidebar
-= Samples =
+= Примеры =
 
-== With only ligand ==
+== Только лиганды ==
 http://modelling-glass-structur.googlecode.com/svn/trunk/tetraedr.gif
 http://modelling-glass-structur.googlecode.com/svn/trunk/5.gif
 http://modelling-glass-structur.googlecode.com/svn/trunk/6.gif
@@ -11,4 +11,4 @@ http://modelling-glass-structur.googlecode.com/svn/trunk/8.gif
 http://modelling-glass-structur.googlecode.com/svn/trunk/9.gif
 http://modelling-glass-structur.googlecode.com/svn/trunk/10.gif
 
-== With ligand & cation ==
+== Лиганды и катионы ==

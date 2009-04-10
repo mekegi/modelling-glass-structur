@@ -1,5 +1,0 @@
-#labels Featured
-#sidebar Sidebar
-
-= Программа =
-В программе за основу взят язык программирования Turbo Pascal

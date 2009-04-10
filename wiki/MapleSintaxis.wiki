@@ -1,8 +1,9 @@
 #labels Featured
 #sidebar Sidebar
-= Sintaxis of MAPLE-file =
-The output of the program generates two files. OUT.TXT and MAPLE.TXT. 
-The first file information on the energy system as a whole at each step. In the second file with the coordinates of points in the Maple-Text.
+= Синтаксис Maple-овского файла =
+
+На выходе программа генерирует два файла. OUT.TXT и MAPLE.TXT.
+В первом файле информация об энергии всей системы на каждом шаге. Во втором файл с координатами точек в формате Maple-Text.
 {{{
 restart: with(plots,Interactive,pointplot3d):
 pointplot3d({
@@ -15,15 +16,15 @@ pointplot3d({
 },axes=normal,symbol=circle,symbolsize=14);
 }}}
 
-In the first line, we connect the library * plots *, not all, but only functions _Interactive_ and _pointplot3d_
-_pointplot3d_ - draws a point 3-D graph.
-_Interactive_ - Need to ensure that after drawing the graphics could have been using the mouse to rotate the graph from different angles for better visual perception. (Feature _restart_ need to clear the memory of the old variables. "Garbage collection")
+В первой строчке мы подключаем библиотеку *plots*, причем не всю, а только функции _Interactive_ и _pointplot3d_
+_pointplot3d_ - рисует точечный 3д-график.
+_Interactive_ - нужна для того чтобы после отрисовки графика можно было при помощи мыши вращать график под разными углами для лучшего визуального восприятия. (Функция _restart_ нужна для очистки памяти от старых переменных. "Сборка мусора")
 
-The functions _pointplot3d_ we send an array of dots. The array is defined using curly brackets, inside which are a comma-separated array
-each point is a set of three numbers * x, y, z * prisoners in curly brackets, eg `[1, -1,1]`
-The symbol `#` is used for comments. everything after that character is not processed interpreter Maple. (in our case, I use comments to display the distance from a point prior to the start coordinates and the charge for debugging)
+В Функцию _pointplot3d_ мы посылаем массив из точек. Массив задается при помощи фигурных скобок, внутри которых через запятую перечислены точки массива
+каждая точка это набор из трех чисел *x,y,z* заключенных в фигурные скобки, например `[1,-1,1]`
+Символ `#` служит для комментариев. все что после этого символа не обрабатывается интерпретатором Maple. (в нашем случае я использую комментарии для вывода расстояния от точки до начала координат и заряда, для отладки)
 
-In order to see what will need to run Maple (for versions older than 9 should start Classic Worksheet Maple is not a standard Maple. Because standard glyukovat and szhiraet a lot of system resources)
+Для того чтобы посмотреть, что получится, необходимо запустить Maple (для версий старше 9 запускать надо Classic Worksheet Maple а не стандартный Maple. Т.к. стандартный глюковат и сжирает очень много системных ресурсов)
 
-When you start Maple, text file MAPLE.TXT need to copy in the window and press Enter. And get some picture here
+После запуска Maple, текст файла MAPLE.TXT надо скопировать в окно программы и нажать Enter. И получится примерно вот такая картинка
 http://modelling-glass-structur.googlecode.com/svn/trunk/6.gif
