@@ -1,4 +1,5 @@
+  * [Algoritm Алгоритм]
   * [MapleSintaxis Синтаксис Maple]
   * [Program Программа]
   * [InputFormat Файл input.txt]
-  * [Algoritm Алгоритм]
+  * [Sample Примеры картинок]
