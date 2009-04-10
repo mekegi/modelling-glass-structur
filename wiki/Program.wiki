@@ -1,5 +1,5 @@
 #sidebar Sidebar
 #labels Featured
 
-= Программа =
-В программе за основу взят язык программирования Turbo Pascal
+= Program =
+In program for base will take programming language Turbo Pascal
