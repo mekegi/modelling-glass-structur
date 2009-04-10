@@ -1,6 +1,6 @@
-# sidebar Sidebar 
-# summary One-sentence summary of this page. 
-# labels Phase-Design, Featured 
+#sidebar Sidebar 
+#summary One-sentence summary of this page. 
+#labels Phase-Design, Featured 
 
 == Algorithm == 
 Model, which is a generalization to the disordered system, the well-known model of "starting points on the sphere, which has long been successfully used to describe configurations of symmetrical high co-ordinated complexes regardless of the type of chemical bond. This configuration of the cluster occur automatically as a result of the relaxation method of Monte-Carlo 
