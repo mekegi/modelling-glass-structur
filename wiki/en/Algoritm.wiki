@@ -5,13 +5,13 @@
 == Algorithm ==
 Model, which is a generalization to the disordered system, the well-known model of "starting points on the sphere, which has long been successfully used to describe configurations of symmetrical high co-ordinated complexes regardless of the type of chemical bond. This configuration of the cluster occur automatically as a result of the relaxation method of Monte-Carlo
 The model consists of RH ion, located at the origin, and a given number of ligands N. Formulas for calculating the potential. Born-Mayer potential:
- V,,ij,,(r) `=` Cq,,1,,q,,2,,/r,,ij,, + A,,ij,,e^-rij/r0^ (1)
+ V,,ij,, `=` Cq,,1,,q,,2,,/r,,ij,, + A,,ij,,e^-rij/r0^ (1)
 Or power potential:
- V,,ij,,(r) `=` Cq,,1,,q,,2,,/r,,ij,, + B,,ij,,/r,,ij,,^n^; n `=` 7-9. (2)
+ V,,ij,, `=` Cq,,1,,q,,2,,/r,,ij,, + B,,ij,,/r,,ij,,^n^; n `=` 7-9. (2)
 The model potential describing the interaction of ligands with the central ion are accounted for as repulsion or attraction:
- V,,ij,,(r) `=` A`[`(r,,ij,,/a)^-12^ - (r,,ij,,/a)^-6^`]` (3)
+ V,,ij,, `=` A`[`(r,,ij,,/a)^-12^ - (r,,ij,,/a)^-6^`]` (3)
 and the potential describing the interaction of ligands with each other - only the repulsion
- V,,ij,,(r) `=` B(r,,ij,,/b)^-12^ (4)
+ V,,ij,, `=` B(r,,ij,,/b)^-12^ (4)
 Construction of a cluster begins with the ligands randomly scattered around the beginning of RH ion, located at the origin. Relaxation of the cluster was carried out using the normal procedure of the Monte Carlo by a sequence of test ligands shifts. Another trial asked a set of three shifts of random numbers that determine the change of coordinates one of the ligands. According to formulas (1) calculated the change of potential energy cluster ΔЕ resulting shift. If the value of e ^ (-ΔE/kT) ^ was more than the next random number in the interval `[0,1]`, then the test was considered to be a shift implemented, and the new cluster configuration is different from the previous one. Otherwise, the test rejected the shift, and continued the previous arrangement of ligands. 
 Relaxation of the cluster model has a much more impressive than the relaxation of long patterns, consisting of hundreds of atoms. In the case of extensive thermodynamic equilibrium model able to obtain only in the case of sufficiently high temperature, corresponds to the melt. At low temperature corresponding to the glass, relaxation of the model slows down so that equilibrium is reached: the energy model of fluctuating around the value, which itself decreases monotonically. Otherwise, the case with the cluster model. At any temperature the average value of energy relatively quickly stabilized. One of the configurations corresponding to a certain degree of relaxation, memory, and then ligands again scattered randomly, and built the new configuration. In this manner, build heterogeneous group of several hundreds of configurations, which represented a stochastic model of the cluster. 
 The temperature kT in the model served as a parameter that specifies the degree of disorder special interest is the configuration constructed at zero temperature, which correspond to the minimum energy for a given number of ligands. It was interesting to compare these configurations with the decisions of the well-known geometric problem of finding the optimal location of a given number of points on the surface of the sphere in which the smallest of arcs connecting two points, reaches the maximum value
