@@ -1,6 +1,6 @@
 #labels Featured
 #sidebar Sidebar
-= Syntax of MAPLE-file =
+= Sintaxis of MAPLE-file =
 The output of the program generates two files. OUT.TXT and MAPLE.TXT. 
 The first file information on the energy system as a whole at each step. In the second file with the coordinates of points in the Maple-Text.
 {{{

@@ -1,5 +1,5 @@
   * [Algoritm]
-  * [MapleSintaxis]
+  * [MapleSyntax]
   * [Program]
   * [InputFormat File input.txt]
   * [Sample]

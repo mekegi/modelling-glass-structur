@@ -1,0 +1,5 @@
+  * [Algoritm خوارزمية]
+  * [MapleSintaxis تركيب القيقب]
+  * [Program البرنامج]
+  * [InputFormat ملف input.txt]
+  * [Sample عينة]
