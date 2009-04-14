@@ -259,7 +259,7 @@ var
 		fm:text;
 	begin
 		assign(fm,'maple.txt'); rewrite(fm);
-		writeln(fm, 'restart: with(plots,Interactive,pointplot3d):'
+		writeln(fm, 'restart: with(plots,pointplot3d):'
 			,#13#10'pointplot3d({');
 		for i :=0 to n1+n2-1 do
 		begin
@@ -272,13 +272,13 @@ var
 			arr[n1+n2,3]:0:10,']  #',R[0,n1+n2]:6:2,arr[n1+n2,4]:4:0,
 			#13#10'},axes=normal,symbol=circle,symbolsize=14);');
 
-		for i :=0 to n1+n2-1 do 
+		{for i :=0 to n1+n2-1 do 
 		begin
 			write(fm, '#');
 			for j:=0 to n1+n2 do
 				write(fm, R[i,j]:8:5,' |');
 			writeln(fm);
-		end;
+		end;{}
 
 		close(fm);
 	end;
