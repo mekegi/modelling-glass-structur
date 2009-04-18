@@ -3,12 +3,12 @@
 = Примеры =
 
 == Только лиганды ==
-http://modelling-glass-structur.googlecode.com/svn/trunk/tetraedr.gif
-http://modelling-glass-structur.googlecode.com/svn/trunk/5.gif
-http://modelling-glass-structur.googlecode.com/svn/trunk/6.gif
-http://modelling-glass-structur.googlecode.com/svn/trunk/7.gif
-http://modelling-glass-structur.googlecode.com/svn/trunk/8.gif
-http://modelling-glass-structur.googlecode.com/svn/trunk/9.gif
-http://modelling-glass-structur.googlecode.com/svn/trunk/10.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/tetraedr.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/5.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/6.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/7.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/8.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/9.gif
+http://modelling-glass-structur.googlecode.com/svn/wiki/images/10.gif
 
 == Лиганды и катионы ==
