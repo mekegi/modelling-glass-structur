@@ -6,7 +6,7 @@ const
 	pi_2 = pi/2;
 	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
 	rh = 0.529; {радиус первой орбиты атома водорода}
-	n = 50; {максимальное количество частиц}
+	n = 20; {максимальное количество частиц}
 	{Vr0 = 8;
 	Vl0 = 1;
 	Ror = 1;
@@ -19,6 +19,7 @@ type
 	TRij = array[0..n,0..n] of double; {массив хранящий расстояния
 		между частицами. например R[2,8] - будет равно расстоянию между 
 		2 и 8 частицами}
+	
 var
 	{n0 = 1; r0 = 0; q0 = 2;
 	n1 = 4; r1 = 3; q1 = -2;
@@ -31,10 +32,13 @@ var
 	cnst:array [1..5,1..4]of double; {константы}
 	arr: TArr;
 	R  : TRij;
+	color : array[0..2]of string;
+	rview : array[0..2]of double;
 	{процедура считывает из файла константы}
 	procedure read_constant(s:string);
 	var
 		f:text;
+		ch:char;
 	begin
 {
 0 1 3
@@ -52,6 +56,22 @@ var
 		readln(f,q0);
 		readln(f,n1,r1,q1);
 		readln(f,n2,r2,q2);
+		while (not EOLN(f)) do begin
+			read(f, ch);
+			write(ch);
+			color[0] := concat(color[0],ch);
+		end; readln(f);
+		while (not EOLN(f)) do begin
+			read(f, ch);
+			write(ch);
+			color[1] := concat(color[1],ch);
+		end; readln(f);
+		while (not EOLN(f)) do begin
+			read(f, ch);
+			write(ch);
+			color[2] := concat(color[2],ch);
+		end; readln(f);
+		readln(f,rview[0],rview[1],rview[2]);
 		readln(f,ftype[1],cnst[1,1],cnst[1,2],cnst[1,3]);
 		readln(f,ftype[2],cnst[2,1],cnst[2,2],cnst[3,3]);
 		readln(f,ftype[3],cnst[3,1],cnst[3,2],cnst[3,3]);
@@ -282,19 +302,38 @@ var
 
 		close(fm);
 	end;
+	procedure _3dmaxout;
+	var
+		i,cl:word;
+		fm:text;
+	begin
+		assign(fm,'out.WRL'); rewrite(fm);
+		writeln(fm, '#VRML V2.0 utf8');
+		for i :=0 to n1+n2 do
+		begin
+			if(i>0) and (i<=n1) then cl := 1
+			else if(i>n1) then cl :=2
+			else cl:=0;
+			writeln(fm, 'DEF Sphere',i,' Transform {'#13#10,
+			'translation ',arr[i,1]:14:10,' ',arr[i,2]:14:10,' ',arr[i,3]:14:10,#13#10,
+			'children [  Shape {  appearance Appearance {   material ',
+			'Material { diffuseColor ',color[cl],' } } geometry ',
+			'Sphere { radius ',rview[cl]:7:4 ,' } }  ] }');
+		end;
+		close(fm);
+	end;
 begin
 	randomize;
 	
 	{= Считываем исходные данные из файла =}
 	read_constant('input.txt');
-	
 	{= Случайный Разброс частиц =}
 	random_array;
-	
 	{= Релаксация системы =}
 	relax;{}
 	
 	{= Вывод координат частиц =}
-	maple_out;
+	_3dmaxout;
+	{}
 	
 end.

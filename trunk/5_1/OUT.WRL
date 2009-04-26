@@ -1,0 +1,22 @@
+#VRML V2.0 utf8
+DEF Sphere0 Transform {
+translation   0.0000000000   0.0000000000   0.0000000000
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.3412 0.8784 0.5608 } } geometry Sphere { radius  0.2000 } }  ] }
+DEF Sphere1 Transform {
+translation   0.3976439423   1.0388313322   0.1127678248
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere2 Transform {
+translation   0.5619585128  -0.3940111088   0.7703704339
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere3 Transform {
+translation  -0.7327823309   0.5145902444   0.6692764887
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere4 Transform {
+translation  -0.9789641906  -0.1700736935  -0.4801515946
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere5 Transform {
+translation   0.1483972821   0.3525797333  -1.0350203170
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere6 Transform {
+translation  -0.6713622657   1.0104890621  -0.4119481978
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
