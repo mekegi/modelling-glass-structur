@@ -3,29 +3,35 @@ DEF Sphere0 Transform {
 translation   0.0000000000   0.0000000000   0.0000000000
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.3412 0.8784 0.5608 } } geometry Sphere { radius  0.2000 } }  ] }
 DEF Sphere1 Transform {
-translation  -0.8339723463  -0.7187539931  -0.0734357928
+translation   0.2387494781  -0.7131281055  -0.7414867703
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere2 Transform {
-translation   0.0079177335   1.0858774096  -0.1951692465
+translation  -0.7244189042  -0.0291176907   0.7683329123
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere3 Transform {
-translation   1.1052111780   0.2155796579  -0.4926681531
+translation   0.1024965752   0.9855667325   0.5063889015
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere4 Transform {
-translation  -0.6457548580   0.3566715669   0.8203886633
+translation   0.8071191998   0.4855691334  -0.5940344297
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere5 Transform {
-translation   0.7825792657   0.4553448967   0.8308560153
+translation  -0.7176015343   0.3830854345  -0.6310753107
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere6 Transform {
-translation  -0.1799937207   0.0104580684  -1.0886704261
+translation   0.4067747096  -0.7856787114   0.6160139072
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere7 Transform {
-translation   0.5215846129  -1.0356607983  -0.4082657553
+translation   1.2896020609   0.1944320470   0.7345206062
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
 DEF Sphere8 Transform {
-translation   0.1988727412  -0.7956805758   0.9149705263
-children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+translation  -0.0315063543   1.2058512027  -0.5693012798
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
 DEF Sphere9 Transform {
-translation   1.1228746691  -0.4992620883   0.3638348305
+translation   1.1278008363   1.0989245348   0.2222305383
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+DEF Sphere10 Transform {
+translation   0.3026654029   0.1559713612   1.2454884387
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+DEF Sphere11 Transform {
+translation   1.1912810770  -0.4764985444  -0.1467153622
 children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
