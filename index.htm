@@ -3,49 +3,27 @@
 <script language="javascript">
 function id(a){ return document.getElementById(a);}
 function change(n){
-	id('i'+n).src = './'+ id('a'+n).value +'_'+ id('k'+n).value +'/OUT.WRL';
+	id('i1').src = './'+ id('a1').value +'/OUT_1.WRL';
+	id('i2').src = './'+ id('a1').value +'/OUT.WRL';
 }
 </script>
 </head>
 <body style="width:100%;height:100%;">
 <form>
-1 рисунок
-анионы
 <select name="inp" id="a1" onchange="change(1);">
-	<option value="4">4</name>
-	<option value="5">5</name>
-	<option value="6">6</name>
-	<option value="7">7</name>
-	<option value="8">8</name>
-</select>
-&nbsp;
-катионы
-<select name="inp" id="k1" onchange="change(1);">
-	<option value="1">1</name>
-	<option value="2">2</name>
-	<option value="3">3</name>
-	<option value="4">4</name>
-</select>
-
-2 рисунок
-анионы
-<select name="inp" id="a2" onchange="change(2);">
-	<option value="4">4</name>
-	<option value="5">5</name>
-	<option value="6">6</name>
-	<option value="7">7</name>
-	<option value="8">8</name>
-</select>
-&nbsp;
-катионы
-<select name="inp" id="k2" onchange="change(2);">
-	<option value="1">1</name>
-	<option value="2">2</name>
-	<option value="3">3</name>
-	<option value="4">4</name>
+	<option value="4_2">4_2</name>
+	<option value="5_1">5_1</name>
+	<option value="6_1">6_1</name>
+	<option value="6_2">6_2</name>
+	<option value="6_3">6_3</name>
+	<option value="7_1">7_1</name>
+	<option value="7_2">7_2</name>
+	<option value="7_3">7_3</name>
+	<option value="7_4">7_4</name>
+	<option value="8_1">8_1</name>
 </select>
 </form>
-<iframe id="i1" src="./5_1/OUT.WRL" style="width:50%; height:100%; float:left; "/>
-<iframe id="i2" src="./6_1/OUT.WRL" style="width:50%; height:100%; float:left; " />
+<iframe id="i1" src="./4_2/OUT_1.WRL" style="width:50%; height:100%; float:left; "/>
+<iframe id="i2" src="./4_2/OUT.WRL" style="width:50%; height:100%; float:left; " />
 </body>
 </html>
