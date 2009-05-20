@@ -1,0 +1,126 @@
+#VRML V2.0 utf8
+DEF Sphere0 Transform {
+translation   0.0000000000   0.0000000000   0.0000000000
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.3412 0.8784 0.5608 } } geometry Sphere { radius  0.2000 } }  ] }
+DEF Sphere1 Transform {
+translation  -0.5236760378   0.8121804106   0.6567386099
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere2 Transform {
+translation   0.6171722138  -0.4393828391  -0.7062245832
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere3 Transform {
+translation  -1.3742927614  -1.0844458475   0.9535702369
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere4 Transform {
+translation   0.7425354423   0.7421952156   0.1674785835
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere5 Transform {
+translation  -0.4684237532  -0.2187362757   1.4946140325
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere6 Transform {
+translation  -0.8663452780   0.3310065106  -0.5362277740
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere7 Transform {
+translation   0.6555721380  -0.5351414528   0.7012068337
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere8 Transform {
+translation  -0.5601743462  -0.9037134278  -0.1257968591
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere9 Transform {
+translation  -1.1651416487  -0.0856631943   0.5311372231
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+DEF Sphere10 Transform {
+translation  -0.2421338157  -1.0858087293   0.8738383783
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+DEF Sphere11 Transform {
+translation   0.3619932782   0.4134958940   1.1840222899
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -0.5236760378   0.8121804106   0.6567386099, -1.3742927614  -1.0844458475   0.9535702369]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -0.5236760378   0.8121804106   0.6567386099, -0.4684237532  -0.2187362757   1.4946140325]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -0.5236760378   0.8121804106   0.6567386099, -0.8663452780   0.3310065106  -0.5362277740]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -0.8663452780   0.3310065106  -0.5362277740, -0.5601743462  -0.9037134278  -0.1257968591]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.6171722138  -0.4393828391  -0.7062245832,  0.7425354423   0.7421952156   0.1674785835]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.6171722138  -0.4393828391  -0.7062245832, -0.8663452780   0.3310065106  -0.5362277740]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.6171722138  -0.4393828391  -0.7062245832, -0.5601743462  -0.9037134278  -0.1257968591]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -1.3742927614  -1.0844458475   0.9535702369, -0.4684237532  -0.2187362757   1.4946140325]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -1.3742927614  -1.0844458475   0.9535702369, -0.5601743462  -0.9037134278  -0.1257968591]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -0.5236760378   0.8121804106   0.6567386099,  0.7425354423   0.7421952156   0.1674785835]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.7425354423   0.7421952156   0.1674785835,  0.6555721380  -0.5351414528   0.7012068337]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.7425354423   0.7421952156   0.1674785835, -0.8663452780   0.3310065106  -0.5362277740]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.7425354423   0.7421952156   0.1674785835, -0.4684237532  -0.2187362757   1.4946140325]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [ -0.4684237532  -0.2187362757   1.4946140325,  0.6555721380  -0.5351414528   0.7012068337]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.6171722138  -0.4393828391  -0.7062245832,  0.6555721380  -0.5351414528   0.7012068337]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [  0.6555721380  -0.5351414528   0.7012068337, -0.5601743462  -0.9037134278  -0.1257968591]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [0 1 -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [
+ -1.1651416487  -0.0856631943   0.5311372231,
+ -0.2421338157  -1.0858087293   0.8738383783,
+  0.3619932782   0.4134958940   1.1840222899,
+]}
+color Color {color [ 0.1412 0.2784 0.9608]}
+coordIndex [0 1 2  -1]}}

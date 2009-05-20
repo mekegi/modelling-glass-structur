@@ -7,6 +7,9 @@ const
 	pi10000 = 31459; {чтобы в цикле не вычислять выражение 10000*пи}
 	rh = 0.529; {радиус первой орбиты атома водорода}
 	n = 20; {максимальное количество частиц}
+	poly1 = #13#10'Shape {geometry IndexedLineSet { colorPerVertex FALSE'+
+			#13#10'coord Coordinate {point [';
+	poly2 = ']}'#13#10'color Color {color [';
 	{Vr0 = 8;
 	Vl0 = 1;
 	Ror = 1;
@@ -20,16 +23,18 @@ type
 		между частицами. например R[2,8] - будет равно расстоянию между 
 		2 и 8 частицами}
 	
+	TPoly = array[0..100,1..2]of word;
 var
 	{n0 = 1; r0 = 0; q0 = 2;
 	n1 = 4; r1 = 3; q1 = -2;
 	n2 = 1; r2 = 4.5; q2 = +2;{}
 	
-	q0, n1, q1, n2, q2: integer;
+	q0, n1, q1, n2, q2, i, j: integer;
 	max_iter : longint;
 	h, debug, r1, r2:double; 
 	ftype:array [0..6] of byte;
 	cnst:array [1..5,1..4]of double; {константы}
+	pr:array[1..100,1..2]of word;
 	arr: TArr;
 	R  : TRij;
 	color : array[0..2]of string;
@@ -58,17 +63,17 @@ var
 		readln(f,n2,r2,q2);
 		while (not EOLN(f)) do begin
 			read(f, ch);
-			write(ch);
+			
 			color[0] := concat(color[0],ch);
 		end; readln(f);
 		while (not EOLN(f)) do begin
 			read(f, ch);
-			write(ch);
+			
 			color[1] := concat(color[1],ch);
 		end; readln(f);
 		while (not EOLN(f)) do begin
 			read(f, ch);
-			write(ch);
+			
 			color[2] := concat(color[2],ch);
 		end; readln(f);
 		readln(f,rview[0],rview[1],rview[2]);
@@ -302,12 +307,65 @@ var
 
 		close(fm);
 	end;
-	procedure _3dmaxout;
+
+	function poly(k:integer):string;
 	var
-		i,cl:word;
-		fm:text;
+		i,j,a,b,l:byte;
+		min,t:word;
+		s:string;
 	begin
-		assign(fm,'out.WRL'); rewrite(fm);
+		s:='';
+		case k of
+			0,1: s:='';
+			2: s:='0 1 ';
+			3: s:='0 1 2 ';
+			4: s:='3 2 0 1 2 0 3 1 ';
+			else begin
+				s:='ddd';
+				if(k=n1)then begin a:=1; b:=n1; end
+				else begin a:=1+n1; b:=n1+n2; end;
+				l:=1;
+				for i:=a to b-1 do
+					for j:=i+1 to b do
+					begin
+						pr[l,1]:=round(R[i,j]*1000);
+						pr[l,2]:=i+(j shl 8);
+						inc(l);
+					end;
+				dec(l);
+				{for i:=1 to l do write(chr((pr[i,2] and 255)+48)+' '+chr((pr[i,2] shr 8)+48)+' : ');
+				writeln(#13#10,n1,n2,k,a,b);
+				readln;{}
+				for i:=1 to l-1 do
+				begin
+					min:=i;
+					for j:=i+1 to l do
+					if(pr[j,1]<pr[min,1]) then
+					begin
+						t:=pr[j,1]; pr[j,1]:=pr[min,1]; pr[min,1]:=t;
+						t:=pr[j,2]; pr[j,2]:=pr[min,2]; pr[min,2]:=t;
+						min:=j;
+					end;
+				end;
+				case k of 
+					4:t:=5;
+					5:t:=7;
+					else t:=k+k;
+				end;
+				pr[100,1]:=t;
+				{for i:=1 to t do
+					s:=s+chr((pr[i,2] and 255)+48-a)+' '+chr((pr[i,2] shr 8)+48-a)+' ';}
+			end;
+		end;
+		poly:=s;
+	end;
+	procedure _3dmaxout(filename:string);
+	var
+		i,cl,i1,i2:word;
+		fm:text;
+		p:string;
+	begin
+		assign(fm, filename); rewrite(fm);
 		writeln(fm, '#VRML V2.0 utf8');
 		for i :=0 to n1+n2 do
 		begin
@@ -320,20 +378,79 @@ var
 			'Material { diffuseColor ',color[cl],' } } geometry ',
 			'Sphere { radius ',rview[cl]:7:4 ,' } }  ] }');
 		end;
+		
+		p:=poly(n1);
+		if((p<>'') and (p<>'ddd')) then
+		begin
+			writeln(fm, poly1);
+			for i:=1 to n1 do
+				writeln(fm, arr[i,1]:14:10,' ',arr[i,2]:14:10,' ',arr[i,3]:14:10,',');
+			writeln(fm, poly2,color[1],
+			']}'#13#10,'coordIndex [',p,' -1]}}');
+		end else if(p='ddd') then
+			for i:=1 to pr[100,1] do
+			begin
+				i1:=pr[i,2] and 255;
+				i2:=pr[i,2] shr 8;
+				writeln(fm, poly1, arr[i1,1]:14:10,' ',arr[i1,2]:14:10,' ',
+				arr[i1,3]:14:10,',',arr[i2,1]:14:10,' ',arr[i2,2]:14:10,' ',
+				arr[i2,3]:14:10,poly2,color[1],']}'#13#10,
+				'coordIndex [0 1 -1]}}');
+			end;
+		
+		
+		if(n2>1)then begin
+		p:=poly(n2);
+		if((p<>'') and (p<>'ddd')) then
+		begin
+			writeln(fm, poly1);
+			for i:=1 to n2 do
+				writeln(fm, arr[n1+i,1]:14:10,' ',arr[n1+i,2]:14:10,' ',arr[n1+i,3]:14:10,',');
+			writeln(fm, poly2,color[2],
+			']}'#13#10,'coordIndex [',p,' -1]}}');
+		end else if(p='ddd') then
+			for i:=1 to pr[100,1] do
+			begin
+				i1:=pr[i,2] and 255;
+				i2:=pr[i,2] shr 8;
+				writeln(fm, poly1, arr[i1,1]:14:10,' ',arr[i1,2]:14:10,' ',
+				arr[i1,3]:14:10,',',arr[i2,1]:14:10,' ',arr[i2,2]:14:10,' ',
+				arr[i2,3]:14:10,poly2,color[2],']}'#13#10,
+				'coordIndex [0 1 -1]}}');
+			end;
+
+		end;
 		close(fm);
 	end;
 begin
 	randomize;
-	
 	{= Считываем исходные данные из файла =}
 	read_constant('input.txt');
 	{= Случайный Разброс частиц =}
-	random_array;
-	{= Релаксация системы =}
-	relax;{}
-	
-	{= Вывод координат частиц =}
-	_3dmaxout;
-	{}
-	
+	writeln('Begin generation...');
+	{$I-}
+	{ Get directory name from command line }
+	MkDir('WRL');
+	if IOResult <> 0 then
+		writeln('Cannot create directory \WRL')
+	  else
+		writeln('Directory \WRL created ');{}
+	{$I+}
+	for i:=4 to 8 do
+	begin
+		j:=2;
+		if(i>5) then j:=3;
+		for j:=0 to j do
+		begin
+			n1:=i; n2:=j;
+			write('wrl\_'+chr(i+48)+'_'+chr(j+48)+'.WRL ...');
+			random_array;
+			{= Релаксация системы =}
+			relax;{}
+			{= Вывод координат частиц =}
+			_3dmaxout('wrl\_'+chr(i+48)+'_'+chr(j+48)+'.WRL');
+			{}
+			writeln(' - [ok] ');
+		end;
+	end;
 end.
