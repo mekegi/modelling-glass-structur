@@ -1,0 +1,29 @@
+#VRML V2.0 utf8
+DEF Sphere0 Transform {
+translation   0.0000000000   0.0000000000   0.0000000000
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.3412 0.8784 0.5608 } } geometry Sphere { radius  0.2000 } }  ] }
+DEF Sphere1 Transform {
+translation  -0.1175433057   0.7109315667  -0.7889310593
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere2 Transform {
+translation  -0.0557065578  -0.6891360674   0.7811620372
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere3 Transform {
+translation  -0.6771129450   0.6348359911   0.5454172966
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere4 Transform {
+translation  -0.7778308001  -0.5468428914  -0.5046285977
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere5 Transform {
+translation  -1.1942287963   0.4893972818  -0.4360912654
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [
+ -0.1175433057   0.7109315667  -0.7889310593,
+ -0.0557065578  -0.6891360674   0.7811620372,
+ -0.6771129450   0.6348359911   0.5454172966,
+ -0.7778308001  -0.5468428914  -0.5046285977,
+]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [3 2 0 1 2 0 3 1  -1]}}

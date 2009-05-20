@@ -1,0 +1,40 @@
+#VRML V2.0 utf8
+DEF Sphere0 Transform {
+translation   0.0000000000   0.0000000000   0.0000000000
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.3412 0.8784 0.5608 } } geometry Sphere { radius  0.2000 } }  ] }
+DEF Sphere1 Transform {
+translation  -0.1897821483   0.0413070865  -1.0307890216
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere2 Transform {
+translation  -1.0793664603   0.0670835412   0.1150560420
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere3 Transform {
+translation  -0.0140180203   1.0866446720  -0.0404604011
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere4 Transform {
+translation   0.0360401919   0.1211174309   1.0412630479
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.7412 0.0784 0.1608 } } geometry Sphere { radius  0.1200 } }  ] }
+DEF Sphere5 Transform {
+translation  -0.7373067884   0.8917239942   0.7953853626
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+DEF Sphere6 Transform {
+translation  -0.8985374825   0.8345865478  -0.6838167641
+children [  Shape {  appearance Appearance {   material Material { diffuseColor  0.1412 0.2784 0.9608 } } geometry Sphere { radius  0.1500 } }  ] }
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [
+ -0.1897821483   0.0413070865  -1.0307890216,
+ -1.0793664603   0.0670835412   0.1150560420,
+ -0.0140180203   1.0866446720  -0.0404604011,
+  0.0360401919   0.1211174309   1.0412630479,
+]}
+color Color {color [ 0.7412 0.0784 0.1608]}
+coordIndex [3 2 0 1 2 0 3 1  -1]}}
+
+Shape {geometry IndexedLineSet { colorPerVertex FALSE
+coord Coordinate {point [
+ -0.7373067884   0.8917239942   0.7953853626,
+ -0.8985374825   0.8345865478  -0.6838167641,
+]}
+color Color {color [ 0.1412 0.2784 0.9608]}
+coordIndex [0 1  -1]}}
