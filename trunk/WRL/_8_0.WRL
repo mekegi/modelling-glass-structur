@@ -35,7 +35,7 @@ coordIndex [0 1 -1]}}
 Shape {geometry IndexedLineSet { colorPerVertex FALSE
 coord Coordinate {point [  1.1002821824  -0.0824479461  -0.3780444918, -0.5269847339   1.0226850343  -0.1930666551]}
 color Color {color [ 0.7412 0.0784 0.1608]}
-coordIndex [0 1 -1]}}
+coordIndex [0 0 -1]}}
 
 Shape {geometry IndexedLineSet { colorPerVertex FALSE
 coord Coordinate {point [  1.1002821824  -0.0824479461  -0.3780444918,  0.0590212907  -1.0957175505  -0.3962519149]}
@@ -100,9 +100,9 @@ coordIndex [0 1 -1]}}
 Shape {geometry IndexedLineSet { colorPerVertex FALSE
 coord Coordinate {point [  1.1002821824  -0.0824479461  -0.3780444918,  0.5203858103  -0.6261556850   0.8377919872]}
 color Color {color [ 0.7412 0.0784 0.1608]}
-coordIndex [0 1 -1]}}
+coordIndex [0 0 -1]}}
 
 Shape {geometry IndexedLineSet { colorPerVertex FALSE
 coord Coordinate {point [ -0.5269847339   1.0226850343  -0.1930666551,  0.0590212907  -1.0957175505  -0.3962519149]}
 color Color {color [ 0.7412 0.0784 0.1608]}
-coordIndex [0 1 -1]}}
+coordIndex [0 0 -1]}}
