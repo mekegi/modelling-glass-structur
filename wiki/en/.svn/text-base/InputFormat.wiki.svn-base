@@ -1,0 +1,24 @@
+#labels Featured
+#sidebar Sidebar
+
+= Format of file input.txt = 
+
+{{{ 
+kolichestvo_iteratsy flag_otladki 
+zaryad_tsentralnoy_chastitsy 
+kol_kationov radius_ot_tsentra charge 
+kol_anionov radius_ot_tsentra charge 
+Vr0 Vl0 R0l R0r 
+Vr1 Vl1 R0l1 R0r1 
+Vr2 Vl2 R0l2 R0r2 
+}}} 
+Sample 
+{{{ 
+1100000 1 
+3 
+4 3 -2 
+1 8.5 2 
+8 1 1 1 
+10 1 1 1 
+5 1 1 1 
+}}}
