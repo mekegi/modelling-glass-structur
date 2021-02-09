@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "https://www.web3d.org/specifications/x3d-3.0.dtd">
+<X3D profile='Immersive' version='3.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-3.0.xsd'>
+    <head>
+        <meta content='ololo.x3d' name='title'/>
+    </head>
+    <Scene>
+        <Viewpoint description='View shape' position='0 0 6'/>
+
+	<Transform translation='0.0000000000  0.0000000000  0.0000000000'>
+        <Shape>
+            <Sphere radius='0.2000000000' />
+            <Appearance>
+                <Material diffuseColor='0.3412 0.8784 0.5608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='0.2626524426  -1.0015186160  0.0305842509'>
+        <Shape>
+            <Sphere radius='0.1200000000' />
+            <Appearance>
+                <Material diffuseColor='0.7412 0.0784 0.1608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='0.9353126609  0.4374215360  0.0812362723'>
+        <Shape>
+            <Sphere radius='0.1200000000' />
+            <Appearance>
+                <Material diffuseColor='0.7412 0.0784 0.1608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='-0.1691224655  0.1141946243  -1.0154031670'>
+        <Shape>
+            <Sphere radius='0.1200000000' />
+            <Appearance>
+                <Material diffuseColor='0.7412 0.0784 0.1608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='1.1482569499  -0.5012315382  -1.0085811765'>
+        <Shape>
+            <Sphere radius='0.1200000000' />
+            <Appearance>
+                <Material diffuseColor='0.7412 0.0784 0.1608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='0.1564329272  -0.9465394976  -1.0741107909'>
+        <Shape>
+            <Sphere radius='0.1500000000' />
+            <Appearance>
+                <Material diffuseColor='0.1412 0.2784 0.9608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='0.8542366964  0.5474466991  -1.0214959891'>
+        <Shape>
+            <Sphere radius='0.1500000000' />
+            <Appearance>
+                <Material diffuseColor='0.1412 0.2784 0.9608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	<Transform translation='1.3026848270  -0.6112807968  0.0639464411'>
+        <Shape>
+            <Sphere radius='0.1500000000' />
+            <Appearance>
+                <Material diffuseColor='0.1412 0.2784 0.9608' />
+            </Appearance>
+        </Shape>
+    </Transform>
+
+	</Scene>
+</X3D>

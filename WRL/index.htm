@@ -1,0 +1,61 @@
+<html>
+<head>
+    <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'></script>
+    <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link>
+
+</head>
+<body>
+
+
+<select id="sel">
+    <option value="_4_1" selected>_4_1</option>
+    <option value="_4_2">_4_2</option>
+    <option value="_4_3">_4_3</option>
+    <option value="_5_1">_5_1</option>
+    <option value="_5_2">_5_2</option>
+    <option value="_5_3">_5_3</option>
+    <option value="_6_1">_6_1</option>
+    <option value="_6_2">_6_2</option>
+    <option value="_6_3">_6_3</option>
+    <option value="_6_4">_6_4</option>
+    <option value="_7_1">_7_1</option>
+    <option value="_7_2">_7_2</option>
+    <option value="_7_3">_7_3</option>
+    <option value="_7_4">_7_4</option>
+    <option value="_8_1">_8_1</option>
+    <option value="_8_2">_8_2</option>
+    <option value="_8_3">_8_3</option>
+    <option value="_8_4">_8_4</option>
+</select>
+<div style="float: left">
+    <x3d width='500px' height='400px'>
+        <scene>
+            <inline id="first" url="./_4_1.x3d"></inline>
+        </scene>
+    </x3d>
+</div>
+<div style="float: left">
+    <x3d width='500px' height='400px'>
+        <scene>
+            <inline id="second" url="./_4_0.x3d"></inline>
+        </scene>
+    </x3d>
+</div>
+<script language="javascript">
+    const tmpl = x3d => `./${x3d}.x3d`,
+        selector = document.getElementById('sel'),
+        first3d = document.getElementById('first'),
+        second3d = document.getElementById('second');
+
+    selector.onchange = ev => {
+        ev.preventDefault();
+
+        const s = selector.value,
+            s1 = s.substr(0, 3) + '0';
+
+        first3d.url = tmpl(s);
+        second3d.url = tmpl(s1);
+    };
+</script>
+</body>
+</html>

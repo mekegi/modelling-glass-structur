@@ -116,11 +116,19 @@ coord Coordinate {point [  0.6555721380  -0.5351414528   0.7012068337, -0.560174
 color Color {color [ 0.7412 0.0784 0.1608]}
 coordIndex [0 1 -1]}}
 
-Shape {geometry IndexedLineSet { colorPerVertex FALSE
-coord Coordinate {point [
- -1.1651416487  -0.0856631943   0.5311372231,
- -0.2421338157  -1.0858087293   0.8738383783,
-  0.3619932782   0.4134958940   1.1840222899,
-]}
-color Color {color [ 0.1412 0.2784 0.9608]}
-coordIndex [0 1 2  -1]}}
+Shape {
+    geometry IndexedLineSet {
+        colorPerVertex FALSE
+        coord Coordinate {
+            point [
+             -1.1651416487  -0.0856631943   0.5311372231,
+             -0.2421338157  -1.0858087293   0.8738383783,
+              0.3619932782   0.4134958940   1.1840222899,
+            ]
+        }
+        color Color {
+            color [ 0.1412 0.2784 0.9608]
+        }
+        coordIndex [0 1 2  -1]
+    }
+}
